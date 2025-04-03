@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.security {
+  justify-content: space-between;
+}
+.security .item {
+  display: flex;
+  border-bottom: 2rpx solid #666666;
+  justify-content: space-between;
+  margin-bottom: 50rpx;
+}
+.security .item .icon-zhengque {
+  color: #18BC37;
+  font-size: 50rpx;
+}
+.security .item .icon-cuowu {
+  color: #d81e06;
+  font-size: 50rpx;
+}
+.security .item .items {
+  margin: 10rpx;
+  width: 300rpx;
+  font-size: 35rpx;
+  color: #409eff;
+}
+.security button {
+  width: 400rpx;
+  text-align: center;
+}
+

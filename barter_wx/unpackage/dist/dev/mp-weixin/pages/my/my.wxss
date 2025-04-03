@@ -1,0 +1,137 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.my {
+  display: flex;
+}
+.my .unLoginInfo {
+  display: flex;
+  flex-direction: raw;
+  width: 100%;
+  text-align: center;
+}
+.my .unLoginInfo image {
+  width: 200rpx;
+  height: 200rpx;
+}
+.my .unLoginInfo text {
+  margin-top: 60rpx;
+}
+.my .unLoginInfo .icon-touxiang {
+  margin-left: 30rpx;
+  font-size: 100rpx;
+}
+.my .unLoginInfo .icon-touxiang text {
+  font-size: 50rpx;
+  color: #787468;
+}
+.my .loginInfo .user {
+  display: flex;
+  flex-direction: raw;
+}
+.my .loginInfo .user image {
+  width: 200rpx;
+  height: 200rpx;
+}
+.my .loginInfo .user text {
+  margin-top: 60rpx;
+  font-size: 50rpx;
+  color: #787468;
+}
+.my .loginInfo .personSet button {
+  width: 600rpx;
+  margin: 20rpx;
+}
+.my .loginInfo .personSet .icon-shangpin {
+  font-size: 55rpx;
+  color: #eb8a31;
+}
+.my .loginInfo .personSet text {
+  font-size: 33rpx;
+}
+.my .loginInfo .personSet .myGoods {
+  width: 700rpx;
+  display: flex;
+  white-space: nowrap;
+  flex-direction: raw;
+}
+.my .loginInfo .personSet .myGoods view {
+  display: inline;
+  width: 250rpx;
+}
+.my .loginInfo .personSet .myGoods view image {
+  display: inline-block;
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10rpx;
+}
+.my .loginInfo .order-section {
+  background-color: #FFFFFF;
+  display: flex;
+  margin-bottom: 30rpx;
+}
+.my .loginInfo .order-section .iconfont {
+  font-size: 55rpx;
+  color: #FF5A5F;
+}
+.my .loginInfo .order-section .order-item {
+  width: 170rpx;
+  height: 120rpx;
+  margin: 8rpx;
+  font-size: 33rpx;
+  text-align: center;
+}
+.my .loginInfo .order-section .order-item text {
+  display: block;
+}
+.my .loginInfo .icon-xiangyou1 {
+  color: #000000;
+  font-size: 40rpx;
+}
+.my .loginInfo .setting {
+  width: 700rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2rpx solid;
+  margin: 10rpx;
+}
+.my .loginInfo .setting view {
+  padding: 5rpx;
+}
+.my .loginInfo .setting .icon-shezhi {
+  color: #F3A73F;
+  font-size: 50rpx;
+}
+.my .loginInfo .setting .icon-shezhi text {
+  color: #000000;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+}
+.my .loginInfo .setting .icon-zhanghaoanquan {
+  color: #54b4ef;
+  font-size: 50rpx;
+}
+.my .loginInfo .setting .icon-zhanghaoanquan text {
+  color: #000000;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+}
+.my .loginInfo .setting .icon-bangzhuzhongxin {
+  color: #54b4ef;
+  font-size: 45rpx;
+}
+.my .loginInfo .setting .icon-bangzhuzhongxin text {
+  color: #000000;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+}
+.my .loginInfo .setting .icon-guanyuwomen {
+  color: #ee883b;
+  font-size: 45rpx;
+}
+.my .loginInfo .setting .icon-guanyuwomen text {
+  color: #000000;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+}
+

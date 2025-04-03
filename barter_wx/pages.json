@@ -1,0 +1,194 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "barter"
+			}
+		}, {
+			"path": "pages/add/add",
+			"style": {
+				"navigationBarTitleText": "发布商品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/cate/cate",
+			"style": {
+				"navigationBarTitleText": "商品分类",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/setting/setting",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/security/security",
+			"style": {
+				"navigationBarTitleText": "账号安全",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/help/help",
+			"style": {
+				"navigationBarTitleText": "帮助中心",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/lstPwd/lstPwd",
+			"style": {
+				"navigationBarTitleText": "忘记密码",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/orders/orders",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "barter",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#007AFF",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/img/首页.png",
+				"selectedIconPath": "static/img/首页2.png"
+			},
+			{
+				"text": "分类",
+				"pagePath": "pages/cate/cate",
+				"iconPath": "static/img/分类.png",
+				"selectedIconPath": "static/img/分类or广场or其他_填充.png"
+			},
+			{
+				"text": "发布",
+				"pagePath": "pages/add/add",
+				"iconPath": "static/img/发布2.png",
+				"selectedIconPath": "static/img/发布.png"
+			},
+
+			{
+				"text": "购物车",
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/img/购物车空.png",
+				"selectedIconPath": "static/img/购物车满.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/img/我的.png",
+				"selectedIconPath": "static/img/我的2.png"
+			}
+		]
+	},
+	"condition": {
+		"current": 0,
+		"list": [{
+				"name": "搜索页面",
+				"path": "pages/search/search",
+				"query": "info=nova"
+			},
+			{
+				"name": "商品详情",
+				"path": "pages/detail/detail",
+				"query": "id=20"
+			},
+			{
+				"name": "个人中心",
+				"path": "pages/my/my",
+				"query": "userName=vue&&userId=41"
+			},
+			{
+				"name": "登录页面",
+				"path": "pages/login/login",
+				"query": ""
+			},
+			{
+				"name": "分类页面",
+				"path": "pages/cate/cate",
+				"query": ""
+			},
+			{
+				"name": "购物车",
+				"path": "pages/cart/cart",
+				"query": ""
+			},
+			{
+				"name": "账号安全",
+				"path":"pages/security/security",
+				"query": ""
+			}
+		]
+	}
+}

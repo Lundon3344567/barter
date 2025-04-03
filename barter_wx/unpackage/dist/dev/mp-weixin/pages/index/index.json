@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "barter",
+  "usingComponents": {
+    "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",
+    "goods-list": "/components/goods-list/goods-list",
+    "zero-back-top": "/uni_modules/zero-back-top/components/zero-back-top/zero-back-top"
+  }
+}

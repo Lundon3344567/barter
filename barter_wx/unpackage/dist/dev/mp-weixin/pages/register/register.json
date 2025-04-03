@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "注册",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-forms": "/uni_modules/uni-forms/components/uni-forms/uni-forms",
+    "uni-forms-item": "/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item",
+    "uni-countdown": "/uni_modules/uni-countdown/components/uni-countdown/uni-countdown"
+  }
+}

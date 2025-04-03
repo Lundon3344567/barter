@@ -1,0 +1,35 @@
+<template>
+	<view class="about">
+		<image src='../../static/barter.png'></image>
+		<view style="font-size: 40rpx;font-weight: bold;">易物</view>
+		<view style="font-weight: bold;">Version 1.0.3</view>
+		
+	<view style="margin-top: 600rpx;color: #6A6A6A;">
+		<view>Copyright@2021-2022 2019级4班软件工程第九组</view>
+		<view>All Rights Reserved</view>
+	</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style lang="scss">
+.about{
+	text-align: center;
+	image{
+		width: 400rpx;
+		height: 400rpx;
+	}
+}
+</style>

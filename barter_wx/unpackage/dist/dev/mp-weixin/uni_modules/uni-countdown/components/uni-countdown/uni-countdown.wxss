@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.uni-countdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.uni-countdown__splitor {
+  margin: 0 2px;
+  font-size: 14px;
+  color: #333;
+}
+.uni-countdown__number {
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+}
+

@@ -1,0 +1,14 @@
+{
+    "id": "lebron-car",
+    "name": "购物车组件",
+    "version": "1.0.1",
+    "description": "普通购物车组件，第一次发布组件，希望可以帮到大家，不喜勿喷。",
+    "keywords": [
+        "购物车",
+        "商城组件",
+        "car"
+    ],
+    "dependencies": {
+        "crypto-js": "^4.1.1"
+    }
+}

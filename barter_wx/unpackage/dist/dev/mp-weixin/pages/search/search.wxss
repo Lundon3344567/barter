@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.search {
+  width: 100%;
+}
+.search .isOver {
+  width: 100%;
+  font-size: 30rpx;
+  text-align: center;
+  margin: 5rpx auto;
+}
+

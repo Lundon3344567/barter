@@ -1,0 +1,74 @@
+{
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "",
+  "appid": "touristappid",
+  "projectname": "barter_wx",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 0,
+      "list": [
+        {
+          "name": "搜索页面",
+          "query": "info=nova",
+          "id": 0,
+          "pathName": "pages/search/search"
+        },
+        {
+          "name": "商品详情",
+          "query": "id=20",
+          "id": 1,
+          "pathName": "pages/detail/detail"
+        },
+        {
+          "name": "个人中心",
+          "query": "userName=vue&&userId=41",
+          "id": 2,
+          "pathName": "pages/my/my"
+        },
+        {
+          "name": "登录页面",
+          "query": "",
+          "id": 3,
+          "pathName": "pages/login/login"
+        },
+        {
+          "name": "分类页面",
+          "query": "",
+          "id": 4,
+          "pathName": "pages/cate/cate"
+        },
+        {
+          "name": "购物车",
+          "query": "",
+          "id": 5,
+          "pathName": "pages/cart/cart"
+        },
+        {
+          "name": "账号安全",
+          "query": "",
+          "id": 6,
+          "pathName": "pages/security/security"
+        }
+      ]
+    }
+  }
+}

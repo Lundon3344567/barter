@@ -1,0 +1,78 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "搜索页面",
+          "pathName": "pages/search/search",
+          "query": "info=nova"
+        },
+        {
+          "id": 1,
+          "name": "商品详情",
+          "pathName": "pages/detail/detail",
+          "query": "id=20"
+        },
+        {
+          "id": 2,
+          "name": "个人中心",
+          "pathName": "pages/my/my",
+          "query": "userName=vue&&userId=41"
+        },
+        {
+          "id": 3,
+          "name": "登录页面",
+          "pathName": "pages/login/login",
+          "query": ""
+        },
+        {
+          "name": "分类页面",
+          "pathName": "pages/cate/cate",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "购物车",
+          "pathName": "pages/cart/cart",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "账号安全",
+          "pathName": "pages/security/security",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单",
+          "pathName": "pages/orders/orders",
+          "query": "type=1",
+          "scene": null
+        },
+        {
+          "name": "注册",
+          "pathName": "pages/register/register",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "忘记密码",
+          "pathName": "pages/lstPwd/lstPwd",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

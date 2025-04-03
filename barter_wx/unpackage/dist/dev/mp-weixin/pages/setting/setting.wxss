@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.container {
+  background-color: #eee;
+}
+.list-cell {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2rpx solid;
+  height: 80rpx;
+}
+.list-cell text {
+  margin: 20rpx;
+}
+switch {
+  -webkit-transform: translateX(16rpx) scale(0.84);
+          transform: translateX(16rpx) scale(0.84);
+}
+

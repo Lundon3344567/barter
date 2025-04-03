@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.login {
+  font-size: 50rpx;
+  width: 100%;
+  text-align: center;
+}
+.login image {
+  width: 500rpx;
+  height: 500rpx;
+}
+.login .button {
+  display: flex;
+  justify-content: space-between;
+  margin: 20rpx;
+}
+.login .button button {
+  width: 150rpx;
+  height: 90rpx;
+}
+

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.help .item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 2rpx solid #808080;
+  height: 80rpx;
+  font-size: 30rpx;
+  margin: 25rpx;
+}
+

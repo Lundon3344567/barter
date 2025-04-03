@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.register {
+  width: 100%;
+  text-align: center;
+}
+image {
+  text-align: center;
+  width: 500rpx;
+  height: 500rpx;
+}
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin: 20rpx;
+}
+.button button {
+  width: 150rpx;
+  height: 90rpx;
+}
+

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.about {
+  text-align: center;
+}
+.about image {
+  width: 400rpx;
+  height: 400rpx;
+}
+

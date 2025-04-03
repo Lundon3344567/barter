@@ -1,0 +1,1 @@
+<view class="search"><goods-list vue-id="50cad900-1" goods="{{searchGoods}}" data-event-opts="{{[['^toDetail',[['goToDetail']]]]}}" bind:toDetail="__e" bind:__l="__l"></goods-list><block wx:if="{{flag}}"><view class="isOver"><text>没有更多数据啦</text>~</view></block><zero-back-top vue-id="50cad900-2" scrollTop="0" right="{{true}}" iconType="arrow" bind:__l="__l"></zero-back-top></view>

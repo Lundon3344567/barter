@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.barter_authority.mapper.BarterUserInfoMapper">
+
+    <resultMap type="com.example.barter_authority.domain.entity.BarterUserInfo" id="BarterUserInfoMap">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="userSid" column="user_sid" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="INTEGER"/>
+        <result property="birth" column="birth" jdbcType="TIMESTAMP"/>
+        <result property="campus" column="campus" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastEditTime" column="last_edit_time" jdbcType="TIMESTAMP"/>
+        <result property="credit" column="credit" jdbcType="INTEGER"/>
+        <result property="stuEmail" column="stu_email" jdbcType="VARCHAR"/>
+        <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+        <result property="userState" column="user_state" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterUserInfoMap">
+        select
+          user_id, username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state
+        from barter_user_info
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterUserInfoMap">
+        select
+          user_id, username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state
+        from barter_user_info
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="userSid != null and userSid != ''">
+                and user_sid = #{userSid}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="birth != null">
+                and birth = #{birth}
+            </if>
+            <if test="campus != null">
+                and campus = #{campus}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+            <if test="credit != null">
+                and credit = #{credit}
+            </if>
+            <if test="stuEmail != null and stuEmail != ''">
+                and stu_email = #{stuEmail}
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                and user_phone = #{userPhone}
+            </if>
+            <if test="userState != null">
+                and user_state = #{userState}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_user_info
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="userSid != null and userSid != ''">
+                and user_sid = #{userSid}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="birth != null">
+                and birth = #{birth}
+            </if>
+            <if test="campus != null">
+                and campus = #{campus}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+            <if test="credit != null">
+                and credit = #{credit}
+            </if>
+            <if test="stuEmail != null and stuEmail != ''">
+                and stu_email = #{stuEmail}
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                and user_phone = #{userPhone}
+            </if>
+            <if test="userState != null">
+                and user_state = #{userState}
+            </if>
+        </where>
+    </select>
+    <select id="queryByName" resultMap="BarterUserInfoMap">
+        select
+            user_id, username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state
+        from barter_user_info
+        where username = #{username}
+    </select>
+    <select id="queryAll" resultMap="BarterUserInfoMap">
+        select
+            user_id, username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state
+        from barter_user_info
+    </select>
+    <select id="countByEmail" resultType="java.lang.Integer">
+        select count(1) from barter_user_info where email = #{email}
+    </select>
+    <select id="countByUsername" resultType="java.lang.Integer">
+        select count(1) from barter_user_info where username= #{username}
+    </select>
+    <select id="queryByUserId" resultType="java.lang.Integer">
+        select count(1) from barter_user_info where user_id = #{userId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into barter_user_info(username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state)
+        values (#{username}, #{userSid}, #{password}, #{email}, #{nickname}, #{gender}, #{birth}, #{campus}, #{createTime}, #{lastEditTime}, #{credit}, #{stuEmail}, #{userPhone}, #{userState})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into barter_user_info(username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.username}, #{entity.userSid}, #{entity.password}, #{entity.email}, #{entity.nickname}, #{entity.gender}, #{entity.birth}, #{entity.campus}, #{entity.createTime}, #{entity.lastEditTime}, #{entity.credit}, #{entity.stuEmail}, #{entity.userPhone}, #{entity.userState})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into barter_user_info(username, user_sid, password, email, nickname, gender, birth, campus, create_time, last_edit_time, credit, stu_email, user_phone, user_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.username}, #{entity.userSid}, #{entity.password}, #{entity.email}, #{entity.nickname}, #{entity.gender}, #{entity.birth}, #{entity.campus}, #{entity.createTime}, #{entity.lastEditTime}, #{entity.credit}, #{entity.stuEmail}, #{entity.userPhone}, #{entity.userState})
+        </foreach>
+        on duplicate key update
+        username = values(username),
+        user_sid = values(user_sid),
+        password = values(password),
+        email = values(email),
+        nickname = values(nickname),
+        gender = values(gender),
+        birth = values(birth),
+        campus = values(campus),
+        create_time = values(create_time),
+        last_edit_time = values(last_edit_time),
+        credit = values(credit),
+        stu_email = values(stu_email),
+        user_phone = values(user_phone),
+        user_state = values(user_state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_user_info
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="userSid != null and userSid != ''">
+                user_sid = #{userSid},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="campus != null">
+                campus = #{campus},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="credit != null">
+                credit = #{credit},
+            </if>
+            <if test="stuEmail != null and stuEmail != ''">
+                stu_email = #{stuEmail},
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                user_phone = #{userPhone},
+            </if>
+            <if test="userState != null">
+                user_state = #{userState},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateByEmail" keyProperty="userId" useGeneratedKeys="true">
+        update barter_user_info
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="userSid != null and userSid != ''">
+                user_sid = #{userSid},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="campus != null">
+                campus = #{campus},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="credit != null">
+                credit = #{credit},
+            </if>
+            <if test="stuEmail != null and stuEmail != ''">
+                stu_email = #{stuEmail},
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                user_phone = #{userPhone},
+            </if>
+            <if test="userState != null">
+                user_state = #{userState},
+            </if>
+        </set>
+        where email = #{email}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_user_info where user_id = #{userId}
+    </delete>
+
+</mapper>
+

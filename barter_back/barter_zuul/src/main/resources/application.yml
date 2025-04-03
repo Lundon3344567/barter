@@ -1,0 +1,42 @@
+server:
+  port: 10010
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: utf-8
+
+spring:
+  application:
+    name: barter-zuul
+
+zuul:
+  retryable: true
+    #  prefix: /api #路由前缀,可加可不加
+    # routes:  #默认路由配置，以下均可不写
+    #  userservice: /userservice/**   #路由配置简化写法
+    # userservice: #这里是路由id，随意写
+    # path: /userservice/** #这里是映射路径
+    # url: http://localhost:8080 #映射路径对应的实际url地址
+  # serviceId: userservice
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10114/eureka
+  instance:
+    prefer-ip-address: true #获取IP地址而不是host名称
+    ip-address: localhost
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 2000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 2 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 熔断超时时长：6000ms

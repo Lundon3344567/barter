@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.barter.adservice.mapper.BarterAdInfoMapper">
+
+    <resultMap type="com.barter.adservice.domain.entity.BarterAdInfo" id="BarterAdInfoMap">
+        <result property="adId" column="ad_id" jdbcType="INTEGER"/>
+        <result property="adName" column="ad_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastEditTime" column="last_edit_time" jdbcType="TIMESTAMP"/>
+        <result property="verifyTime" column="verify_time" jdbcType="TIMESTAMP"/>
+        <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
+        <result property="adDescribe" column="ad_describe" jdbcType="VARCHAR"/>
+        <result property="adUrl" column="ad_url" jdbcType="VARCHAR"/>
+        <result property="auditId" column="audit_id" jdbcType="INTEGER"/>
+        <result property="adValidity" column="ad_validity" jdbcType="TIMESTAMP"/>
+        <result property="adState" column="ad_state" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterAdInfoMap">
+        select
+          ad_id, ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state
+        from barter_ad_info
+        where ad_id = #{adId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterAdInfoMap">
+        select
+          ad_id, ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state
+        from barter_ad_info
+        <where>
+            <if test="adId != null">
+                and ad_id = #{adId}
+            </if>
+            <if test="adName != null and adName != ''">
+                and ad_name = #{adName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+            <if test="verifyTime != null">
+                and verify_time = #{verifyTime}
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                and img_url = #{imgUrl}
+            </if>
+            <if test="adDescribe != null and adDescribe != ''">
+                and ad_describe = #{adDescribe}
+            </if>
+            <if test="adUrl != null and adUrl != ''">
+                and ad_url = #{adUrl}
+            </if>
+            <if test="auditId != null">
+                and audit_id = #{auditId}
+            </if>
+            <if test="adValidity != null">
+                and ad_validity = #{adValidity}
+            </if>
+            <if test="adState != null">
+                and ad_state = #{adState}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="BarterAdInfoMap" resultType="com.barter.adservice.domain.entity.BarterAdInfo">
+        select
+        ad_id, ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state
+        from barter_ad_info
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_ad_info
+        <where>
+            <if test="adId != null">
+                and ad_id = #{adId}
+            </if>
+            <if test="adName != null and adName != ''">
+                and ad_name = #{adName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+            <if test="verifyTime != null">
+                and verify_time = #{verifyTime}
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                and img_url = #{imgUrl}
+            </if>
+            <if test="adDescribe != null and adDescribe != ''">
+                and ad_describe = #{adDescribe}
+            </if>
+            <if test="adUrl != null and adUrl != ''">
+                and ad_url = #{adUrl}
+            </if>
+            <if test="auditId != null">
+                and audit_id = #{auditId}
+            </if>
+            <if test="adValidity != null">
+                and ad_validity = #{adValidity}
+            </if>
+            <if test="adState != null">
+                and ad_state = #{adState}
+            </if>
+        </where>
+    </select>
+    <select id="adSelect" resultMap="BarterAdInfoMap">
+        select
+        ad_id, ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state
+        from barter_ad_info
+    </select>
+    <select id="adSelectOrderBy" resultMap="BarterAdInfoMap" resultType="com.barter.adservice.domain.entity.BarterAdInfo">
+        select
+        ad_id, ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state
+        from barter_ad_info
+        order by create_time desc
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="adId" useGeneratedKeys="true">
+        insert into barter_ad_info(ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state)
+        values (#{adName}, #{createTime}, #{lastEditTime}, #{verifyTime}, #{imgUrl}, #{adDescribe}, #{adUrl}, #{auditId}, #{adValidity}, #{adState})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="adId" useGeneratedKeys="true">
+        insert into barter_ad_info(ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.adName}, #{entity.createTime}, #{entity.lastEditTime}, #{entity.verifyTime}, #{entity.imgUrl}, #{entity.adDescribe}, #{entity.adUrl}, #{entity.auditId}, #{entity.adValidity}, #{entity.adState})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="adId" useGeneratedKeys="true">
+        insert into barter_ad_info(ad_name, create_time, last_edit_time, verify_time, img_url, ad_describe, ad_url, audit_id, ad_validity, ad_state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.adName}, #{entity.createTime}, #{entity.lastEditTime}, #{entity.verifyTime}, #{entity.imgUrl}, #{entity.adDescribe}, #{entity.adUrl}, #{entity.auditId}, #{entity.adValidity}, #{entity.adState})
+        </foreach>
+        on duplicate key update
+        ad_name = values(ad_name),
+        create_time = values(create_time),
+        last_edit_time = values(last_edit_time),
+        verify_time = values(verify_time),
+        img_url = values(img_url),
+        ad_describe = values(ad_describe),
+        ad_url = values(ad_url),
+        audit_id = values(audit_id),
+        ad_validity = values(ad_validity),
+        ad_state = values(ad_state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_ad_info
+        <set>
+            <if test="adName != null and adName != ''">
+                ad_name = #{adName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="verifyTime != null">
+                verify_time = #{verifyTime},
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                img_url = #{imgUrl},
+            </if>
+            <if test="adDescribe != null and adDescribe != ''">
+                ad_describe = #{adDescribe},
+            </if>
+            <if test="adUrl != null and adUrl != ''">
+                ad_url = #{adUrl},
+            </if>
+            <if test="auditId != null">
+                audit_id = #{auditId},
+            </if>
+            <if test="adValidity != null">
+                ad_validity = #{adValidity},
+            </if>
+            <if test="adState != null">
+                ad_state = #{adState},
+            </if>
+        </set>
+        where ad_id = #{adId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_ad_info where ad_id = #{adId}
+    </delete>
+
+</mapper>
+

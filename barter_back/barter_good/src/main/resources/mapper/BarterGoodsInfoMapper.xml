@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.barter_good.mapper.BarterGoodsInfoMapper">
+
+    <resultMap type="com.example.barter_good.domain.entity.BarterGoodsInfo" id="BarterGoodsInfoMap">
+        <result property="goodId" column="good_id" jdbcType="INTEGER"/>
+        <result property="ownerId" column="owner_id" jdbcType="INTEGER"/>
+        <result property="goodName" column="good_name" jdbcType="VARCHAR"/>
+        <result property="goodPrice" column="good_price" jdbcType="NUMERIC"/>
+        <result property="goodFlag" column="good_flag" jdbcType="INTEGER"/>
+        <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
+        <result property="goodDescribe" column="good_describe" jdbcType="VARCHAR"/>
+        <result property="collectionNum" column="collection_num" jdbcType="INTEGER"/>
+        <result property="classifiedNum" column="classified_num" jdbcType="INTEGER"/>
+        <result property="viewCount" column="view_count" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="goodNum" column="good_num" jdbcType="INTEGER"/>
+        <result property="ownerFlag" column="owner_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--    根据组合条件筛选商品-->
+    <select id="queryByAll" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        <where>
+            good_flag = 0 and good_num > 0 and owner_flag = 1
+            <if test="id != null">and classified_num = #{id}</if>
+            <if test="name != null">and good_name like "%"#{name}"%"</if>
+        </where>
+        <if test="collectionType != null || timeType != null || priceType != null || viewCountType != null">order by</if>
+        <trim prefixOverrides=",">
+            <if test="collectionType == 0">collection_num asc</if>
+            <if test="collectionType == 1">collection_num desc</if>
+            <if test="priceType == 0">,good_price asc</if>
+            <if test="priceType == 1">,good_price desc</if>
+            <if test="timeType == 0">,create_time asc</if>
+            <if test="timeType == 1">,create_time desc</if>
+            <if test="viewCountType == 0">,view_count asc</if>
+            <if test="viewCountType == 1">,view_count desc</if>
+        </trim>
+    </select>
+
+<!--    根据价格筛选商品-->
+    <select id="queryByPrice" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        order by good_price desc
+    </select>
+
+<!--    根据收藏数筛选商品-->
+    <select id="queryByCollection" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        order by collection_num desc
+    </select>
+
+    <!--    根据分类筛选商品-->
+    <select id="queryByClassify" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        where classified_num=#{id} and good_num>0 and good_flag=0
+    </select>
+
+    <!--    按创建时间排序商品-->
+    <select id="queryByTime" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        order by create_time desc
+    </select>
+
+    <!--查询单个商品-->
+    <select id="queryById" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        where good_id = #{goodId}
+    </select>
+
+    <!--    模糊查询商品-->
+    <select id="queryByName" resultMap="BarterGoodsInfoMap" parameterType="string">
+        select *
+        from barter_goods_info
+        where good_name like "%"#{goodName}"%"
+    </select>
+
+    <!--    查询所有商品，用于获取访问量-->
+    <select id="queryAll" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterGoodsInfoMap">
+        select *
+        from barter_goods_info
+        <where>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="ownerId != null">
+                and owner_id = #{ownerId}
+            </if>
+            <if test="goodName != null and goodName != ''">
+                and good_name = #{goodName}
+            </if>
+            <if test="goodPrice != null">
+                and good_price = #{goodPrice}
+            </if>
+            <if test="goodFlag != null">
+                and good_flag = #{goodFlag}
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                and img_url = #{imgUrl}
+            </if>
+            <if test="goodDescribe != null and goodDescribe != ''">
+                and good_describe = #{goodDescribe}
+            </if>
+            <if test="collectionNum != null">
+                and collection_num = #{collectionNum}
+            </if>
+            <if test="classifiedNum != null">
+                and classified_num = #{classifiedNum}
+            </if>
+            <if test="viewCount != null">
+                and view_count = #{viewCount}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="ownerFlag != null">
+                and owner_flag = #{ownerFlag}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_goods_info
+        <where>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="ownerId != null">
+                and owner_id = #{ownerId}
+            </if>
+            <if test="goodName != null and goodName != ''">
+                and good_name = #{goodName}
+            </if>
+            <if test="goodPrice != null">
+                and good_price = #{goodPrice}
+            </if>
+            <if test="goodFlag != null">
+                and good_flag = #{goodFlag}
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                and img_url = #{imgUrl}
+            </if>
+            <if test="goodDescribe != null and goodDescribe != ''">
+                and good_describe = #{goodDescribe}
+            </if>
+            <if test="collectionNum != null">
+                and collection_num = #{collectionNum}
+            </if>
+            <if test="classifiedNum != null">
+                and classified_num = #{classifiedNum}
+            </if>
+            <if test="viewCount != null">
+                and view_count = #{viewCount}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="ownerFlag != null">
+                and owner_flag = #{ownerFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryByParentId" resultMap="BarterGoodsInfoMap" resultType="com.example.barter_good.domain.entity.BarterGoodsInfo">
+        select * from barter_goods_info where classified_num in(select classify_id from barter_goods_classify where parent_id=#{parentId})
+    </select>
+
+    <select id="queryByViewCount" resultMap="BarterGoodsInfoMap" resultType="com.example.barter_good.domain.entity.BarterGoodsInfo">
+        select * from barter_goods_info order by view_count desc
+    </select>
+
+    <select id="queryByUserId" resultMap="BarterGoodsInfoMap" resultType="com.example.barter_good.domain.entity.BarterGoodsInfo">
+        select * from barter_goods_info where owner_id = #{userId} and good_flag=#{type}
+    </select>
+
+    <select id="queryByUserIdAll" resultMap="BarterGoodsInfoMap" resultType="com.example.barter_good.domain.entity.BarterGoodsInfo">
+        select * from barter_goods_info where owner_id = #{userId}
+    </select>
+    <select id="selectClassifiidByGoodId" resultType="java.lang.Long">
+        select classified_num from barter_goods_info where good_id = #{goodId}
+    </select>
+    <select id="queryByGoodId" resultType="java.lang.Integer">
+        select count(*) from barter_goods_info where good_id = #{goodId}
+    </select>
+    <select id="queryByData" resultMap="BarterGoodsInfoMap" resultType="com.example.barter_good.domain.entity.BarterGoodsInfo">
+        select *
+        from barter_goods_info where create_time >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="goodId" useGeneratedKeys="true">
+        insert into barter_goods_info(owner_id, good_name, good_price, good_num, good_flag, img_url, good_describe, collection_num, classified_num, view_count, create_time, owner_flag)
+        values (#{ownerId}, #{goodName}, #{goodPrice}, #{goodNum}, #{goodFlag}, #{imgUrl}, #{goodDescribe}, #{collectionNum}, #{classifiedNum}, #{viewCount}, #{createTime}, #{ownerFlag})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="goodId" useGeneratedKeys="true">
+        insert into barter_goods_info(owner_id, good_name, good_price, good_num, good_flag, img_url, good_describe, collection_num, classified_num, view_count, create_time,owner_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.ownerId}, #{entity.goodName}, #{entity.goodPrice}, #{entity.goodNum}, #{entity.goodFlag}, #{entity.imgUrl}, #{entity.goodDescribe}, #{entity.collectionNum}, #{entity.classifiedNum}, #{entity.viewCount}, #{entity.createTime}, #{entity.ownerFlag})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="goodId" useGeneratedKeys="true">
+        insert into barter_goods_info(owner_id, good_name, good_price, good_num, good_flag, img_url, good_describe, collection_num, classified_num, view_count, create_time, owner_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.ownerId}, #{entity.goodName}, #{entity.goodPrice}, #{entity.goodNum}, #{entity.goodFlag}, #{entity.imgUrl}, #{entity.goodDescribe}, #{entity.collectionNum}, #{entity.classifiedNum}, #{entity.viewCount}, #{entity.createTime}, #{entity.ownerFlag})
+        </foreach>
+        on duplicate key update
+        owner_id = values(owner_id),
+        good_name = values(good_name),
+        good_price = values(good_price),
+        good_num = values(good_num),
+        good_flag = values(good_flag),
+        img_url = values(img_url),
+        good_describe = values(good_describe),
+        collection_num = values(collection_num),
+        classified_num = values(classified_num),
+        view_count = values(view_count),
+        create_time = values(create_time),
+        owner_flag = values(owner_flag)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_goods_info
+        <set>
+            <if test="ownerId != null">
+                owner_id = #{ownerId},
+            </if>
+            <if test="goodName != null and goodName != ''">
+                good_name = #{goodName},
+            </if>
+            <if test="goodPrice != null">
+                good_price = #{goodPrice},
+            </if>
+            <if test="goodNum != null">
+                good_num = #{goodNum},
+            </if>
+            <if test="goodFlag != null">
+                good_flag = #{goodFlag},
+            </if>
+            <if test="imgUrl != null and imgUrl != ''">
+                img_url = #{imgUrl},
+            </if>
+            <if test="goodDescribe != null and goodDescribe != ''">
+                good_describe = #{goodDescribe},
+            </if>
+            <if test="collectionNum != null">
+                collection_num = #{collectionNum},
+            </if>
+            <if test="classifiedNum != null">
+                classified_num = #{classifiedNum},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="ownerFlag != null">
+                owner_flag = #{ownerFlag}
+            </if>
+        </set>
+        where good_id = #{goodId}
+    </update>
+    <update id="updateSubtract">
+        update barter_goods_info set good_num = good_num - #{num} where good_id = #{goodId} and good_num - #{num}>=0
+    </update>
+    <update id="updateAddNum">
+        update barter_goods_info set good_num = good_num + #{num} where good_id = #{goodId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_goods_info where good_id = #{goodId}
+    </delete>
+
+    <select id="queryGoodsNum" resultType="java.lang.Integer">
+        select good_num
+        from barter_goods_info where good_id = #{goodsId}
+    </select>
+
+
+
+</mapper>
+

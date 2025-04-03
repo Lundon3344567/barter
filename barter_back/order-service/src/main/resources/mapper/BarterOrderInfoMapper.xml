@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.barter.orderservice.mapper.BarterOrderInfoMapper">
+
+    <resultMap type="com.barter.orderservice.domain.entity.BarterOrderInfo" id="BarterOrderInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sellerId" column="seller_id" jdbcType="INTEGER"/>
+        <result property="buyerId" column="buyer_id" jdbcType="INTEGER"/>
+        <result property="goodId" column="good_id" jdbcType="INTEGER"/>
+        <result property="goodNum" column="good_num" jdbcType="INTEGER"/>
+        <result property="orderMoney" column="order_money" jdbcType="INTEGER"/>
+        <result property="payMoney" column="pay_money" jdbcType="INTEGER"/>
+        <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+        <result property="orderFlag" column="order_flag" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastEditTime" column="last_edit_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterOrderInfoMap">
+        select
+          id, seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time
+        from barter_order_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterOrderInfoMap">
+        select
+          id, seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time
+        from barter_order_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sellerId != null">
+                and seller_id = #{sellerId}
+            </if>
+            <if test="buyerId != null">
+                and buyer_id = #{buyerId}
+            </if>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="goodNum != null">
+                and good_num = #{goodNum}
+            </if>
+            <if test="orderMoney != null">
+                and order_money = #{orderMoney}
+            </if>
+            <if test="payMoney != null">
+                and pay_money = #{payMoney}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="orderFlag != null">
+                and order_flag = #{orderFlag}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_order_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sellerId != null">
+                and seller_id = #{sellerId}
+            </if>
+            <if test="buyerId != null">
+                and buyer_id = #{buyerId}
+            </if>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="goodNum != null">
+                and good_num = #{goodNum}
+            </if>
+            <if test="orderMoney != null">
+                and order_money = #{orderMoney}
+            </if>
+            <if test="payMoney != null">
+                and pay_money = #{payMoney}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="orderFlag != null">
+                and order_flag = #{orderFlag}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+        </where>
+    </select>
+    <select id="queryByUserId" resultMap="BarterOrderInfoMap" resultType="com.barter.orderservice.domain.entity.BarterOrderInfo">
+        select
+          id, seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time
+        from barter_order_info
+        where buyer_id = #{userId}
+    </select>
+    <select id="queryAll" resultMap="BarterOrderInfoMap" resultType="com.barter.orderservice.domain.entity.BarterOrderInfo">
+        select
+          id, seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time
+        from barter_order_info
+    </select>
+    <select id="queryOrderFlagByUserId" resultMap="BarterOrderInfoMap" resultType="com.barter.orderservice.domain.entity.BarterOrderInfo">
+        select
+          id, seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time
+        from barter_order_info
+        where buyer_id = #{userId} and order_flag = #{flag}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_order_info(seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time)
+        values (#{sellerId}, #{buyerId}, #{goodId}, #{goodNum}, #{orderMoney}, #{payMoney}, #{payTime}, #{orderFlag}, #{createTime}, #{lastEditTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_order_info(seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.sellerId}, #{entity.buyerId}, #{entity.goodId}, #{entity.goodNum}, #{entity.orderMoney}, #{entity.payMoney}, #{entity.payTime}, #{entity.orderFlag}, #{entity.createTime}, #{entity.lastEditTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_order_info(seller_id, buyer_id, good_id, good_num, order_money, pay_money, pay_time, order_flag, create_time, last_edit_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.sellerId}, #{entity.buyerId}, #{entity.goodId}, #{entity.goodNum}, #{entity.orderMoney}, #{entity.payMoney}, #{entity.payTime}, #{entity.orderFlag}, #{entity.createTime}, #{entity.lastEditTime})
+        </foreach>
+        on duplicate key update
+        seller_id = values(seller_id),
+        buyer_id = values(buyer_id),
+        good_id = values(good_id),
+        good_num = values(good_num),
+        order_money = values(order_money),
+        pay_money = values(pay_money),
+        pay_time = values(pay_time),
+        order_flag = values(order_flag),
+        create_time = values(create_time),
+        last_edit_time = values(last_edit_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_order_info
+        <set>
+            <if test="sellerId != null">
+                seller_id = #{sellerId},
+            </if>
+            <if test="buyerId != null">
+                buyer_id = #{buyerId},
+            </if>
+            <if test="goodId != null">
+                good_id = #{goodId},
+            </if>
+            <if test="goodNum != null">
+                good_num = #{goodNum},
+            </if>
+            <if test="orderMoney != null">
+                order_money = #{orderMoney},
+            </if>
+            <if test="payMoney != null">
+                pay_money = #{payMoney},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime},
+            </if>
+            <if test="orderFlag != null">
+                order_flag = #{orderFlag},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateFlag">
+        update barter_order_info set order_flag = -1 where id = #{id}
+    </update>
+    <update id="updatePaymentFlagById">
+        update barter_order_info set order_flag = 1 where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_order_info where id = #{id}
+    </delete>
+
+</mapper>
+

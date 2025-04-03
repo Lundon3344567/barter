@@ -1,0 +1,89 @@
+spring:
+  datasource:
+    url: ENC(3sXK+PCshgMWwHzHW4HmBD9wjsHevMNPdI+UFpsk3ipw3QjJWl4uwk0TyyOW+tUEV9Z3Ex8ZEd9RfamMe/46gJN/7dUP2SqU3gPVIYzODv4Dq10r315uMe1H2VkkdDp2EmqAjeyd5vKjC0LavPMW1nRgaxvvFLaU08Wfn1ClKiDPgra4eIf042lS2trD3WoY)
+    username: ENC(RgucbTXW9RsKdFqQHAetLw6Q+S3HKEZy0xybdxmz3KKAYigGYqs4+S+rM/wYFqWt)
+    password: ENC(LtXYT451SpUS9MWYeb8eqA9OIpDEgAiHVTmP6p+31QjKpL6gP6rQHxu3FnGBtOnj)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # ??connectProperties?????mergeSql????SQL??
+    minEvictableIdleTimeMillis: 300000
+    type: com.alibaba.druid.pool.DruidDataSource
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    validationQuery: SELECT 1 FROM DUAL
+    connectionProperties:
+      druid:
+        stat:
+          mergeSql: true
+          slowSqlMillis: 5000
+    redis:
+      # Redis?????????0?
+      database: 0
+      # Redis?????
+      host: 127.0.0.1
+      # Redis???????
+      port: 6379
+    #     Redis?????????????
+    #    password: 123456
+  profiles:
+    active: dev
+
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.walnut.barter.domain
+  configuration:
+    #    ??sql???????
+    # TODO ??sql
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+server:
+  port: 8081
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: utf-8
+  private:
+    key: ODFipEJFe4Pdp4mq
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+#token-config:
+#  jwt:
+#    header: Authorization
+#    expire: 604800 #7??????
+#    secret: ji8n3439n439n43ld9ne9343fdfer 49h
+#    tokenHead: Bearer
+oss:
+  qiniu:
+    url: ENC(CWMXm14B8gCMU9NExWC8XHxv6v2IVHc902H5hcPpB+a5WfwXB1FX/IJaRgqUiZyGCmYrjzHvN/LJORyAifpGgA==)
+    accessKey: ENC(Jh+63s1nbLLwk3J3dSLXFTPgeaW5x6cbNrrgUQUeJI8gIwVjCFJMSWMu51F+WGgl5Pq5YRZ2wNt6DNUadnpP7Xq0AJZNk6LmjozgSXV14dY=)
+    secretKey: ENC(mTvAqvM7DSuXdyiOfI1IN43IR4Yn4Cpm3YuAEgCmG8TDjSOSYbzl4rdf/9cxJRNN0f6pg14WqfUj8w0N3eJROr26lN2LSe1hZAIAaaTGOq4=)
+    bucketName: ENC(oj3or+2uFn/4usjoB0dwopk1KD2Oh9rovW9Q1RtrY3wvpamdEc79IF56Ny3WSEnU)
+
+
+
+jasypt:
+  encryptor:
+    password: 0aF94J3B8pfd3DgQzXkOa2GPURD
+
+aes:
+  private:
+    key: ODFipEJFe4Pdp4mq
+
+client:
+  public:
+    key: ODFipEJFe4Pdp4mq
+
+#?????????
+bloom:
+  filter:
+    expectedInsertions: 10000
+    fpp: 0.01F

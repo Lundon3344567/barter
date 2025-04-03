@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.barter_log.mapper.BarterExcDailyMapper">
+
+    <resultMap type="com.example.barter_log.domain.entity.BarterExcDaily" id="BarterExcDailyMap">
+        <result property="excId" column="exc_id" jdbcType="VARCHAR"/>
+        <result property="excReqParam" column="exc_req_param" jdbcType="VARCHAR"/>
+        <result property="excName" column="exc_name" jdbcType="VARCHAR"/>
+        <result property="excMes" column="exc_mes" jdbcType="VARCHAR"/>
+        <result property="operateUserId" column="operate_user_id" jdbcType="VARCHAR"/>
+        <result property="operateUserName" column="operate_user_name" jdbcType="VARCHAR"/>
+        <result property="operateMethod" column="operate_method" jdbcType="VARCHAR"/>
+        <result property="operateUri" column="operate_uri" jdbcType="VARCHAR"/>
+        <result property="operateIp" column="operate_ip" jdbcType="VARCHAR"/>
+        <result property="operateTime" column="operate_time" jdbcType="TIMESTAMP"/>
+        <result property="operateVer" column="operate_ver" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterExcDailyMap">
+        select
+          exc_id, exc_req_param, exc_name, exc_mes, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_exc_daily
+        where exc_id = #{excId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterExcDailyMap">
+        select
+          exc_id, exc_req_param, exc_name, exc_mes, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_exc_daily
+        <where>
+            <if test="excId != null and excId != ''">
+                and exc_id = #{excId}
+            </if>
+            <if test="excReqParam != null and excReqParam != ''">
+                and exc_req_param = #{excReqParam}
+            </if>
+            <if test="excName != null and excName != ''">
+                and exc_name = #{excName}
+            </if>
+            <if test="excMes != null and excMes != ''">
+                and exc_mes = #{excMes}
+            </if>
+            <if test="operateUserId != null and operateUserId != ''">
+                and operate_user_id = #{operateUserId}
+            </if>
+            <if test="operateUserName != null and operateUserName != ''">
+                and operate_user_name = #{operateUserName}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="operateUri != null and operateUri != ''">
+                and operate_uri = #{operateUri}
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                and operate_ip = #{operateIp}
+            </if>
+            <if test="operateTime != null">
+                and operate_time = #{operateTime}
+            </if>
+            <if test="operateVer != null and operateVer != ''">
+                and operate_ver = #{operateVer}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_exc_daily
+        <where>
+            <if test="excId != null and excId != ''">
+                and exc_id = #{excId}
+            </if>
+            <if test="excReqParam != null and excReqParam != ''">
+                and exc_req_param = #{excReqParam}
+            </if>
+            <if test="excName != null and excName != ''">
+                and exc_name = #{excName}
+            </if>
+            <if test="excMes != null and excMes != ''">
+                and exc_mes = #{excMes}
+            </if>
+            <if test="operateUserId != null and operateUserId != ''">
+                and operate_user_id = #{operateUserId}
+            </if>
+            <if test="operateUserName != null and operateUserName != ''">
+                and operate_user_name = #{operateUserName}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="operateUri != null and operateUri != ''">
+                and operate_uri = #{operateUri}
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                and operate_ip = #{operateIp}
+            </if>
+            <if test="operateTime != null">
+                and operate_time = #{operateTime}
+            </if>
+            <if test="operateVer != null and operateVer != ''">
+                and operate_ver = #{operateVer}
+            </if>
+        </where>
+    </select>
+    <select id="queryAll" resultType="com.example.barter_log.domain.entity.BarterExcDaily">
+        select
+            exc_id, exc_req_param, exc_name, exc_mes, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_exc_daily
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="excId" useGeneratedKeys="true">
+        insert into barter_exc_daily(exc_id, exc_req_param, exc_name, exc_mes, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver)
+        values (#{excId}, #{excReqParam}, #{excName}, #{excMes}, #{operateUserId}, #{operateUserName}, #{operateMethod}, #{operateUri}, #{operateIp}, #{operateTime}, #{operateVer})
+    </insert>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_exc_daily where exc_id = #{excId}
+    </delete>
+
+</mapper>
+

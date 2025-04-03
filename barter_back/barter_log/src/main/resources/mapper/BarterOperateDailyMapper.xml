@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.barter_log.mapper.BarterOperateDailyMapper">
+
+    <resultMap type="com.example.barter_log.domain.entity.BarterOperateDaily" id="BarterOperateDailyMap">
+        <result property="operateId" column="operate_id" jdbcType="VARCHAR"/>
+        <result property="operateModul" column="operate_modul" jdbcType="VARCHAR"/>
+        <result property="operateType" column="operate_type" jdbcType="VARCHAR"/>
+        <result property="operateDesc" column="operate_desc" jdbcType="VARCHAR"/>
+        <result property="operateReqParam" column="operate_req_param" jdbcType="VARCHAR"/>
+        <result property="operateResParam" column="operate_res_param" jdbcType="VARCHAR"/>
+        <result property="operateUserId" column="operate_user_id" jdbcType="VARCHAR"/>
+        <result property="operateUserName" column="operate_user_name" jdbcType="VARCHAR"/>
+        <result property="operateMethod" column="operate_method" jdbcType="VARCHAR"/>
+        <result property="operateUri" column="operate_uri" jdbcType="VARCHAR"/>
+        <result property="operateIp" column="operate_ip" jdbcType="VARCHAR"/>
+        <result property="operateTime" column="operate_time" jdbcType="TIMESTAMP"/>
+        <result property="operateVer" column="operate_ver" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterOperateDailyMap">
+        select
+          operate_id, operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_operate_daily
+        where operate_id = #{operateId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterOperateDailyMap">
+        select
+          operate_id, operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_operate_daily
+        <where>
+            <if test="operateId != null and operateId != ''">
+                and operate_id = #{operateId}
+            </if>
+            <if test="operateModul != null and operateModul != ''">
+                and operate_modul = #{operateModul}
+            </if>
+            <if test="operateType != null and operateType != ''">
+                and operate_type = #{operateType}
+            </if>
+            <if test="operateDesc != null and operateDesc != ''">
+                and operate_desc = #{operateDesc}
+            </if>
+            <if test="operateReqParam != null and operateReqParam != ''">
+                and operate_req_param = #{operateReqParam}
+            </if>
+            <if test="operateResParam != null and operateResParam != ''">
+                and operate_res_param = #{operateResParam}
+            </if>
+            <if test="operateUserId != null and operateUserId != ''">
+                and operate_user_id = #{operateUserId}
+            </if>
+            <if test="operateUserName != null and operateUserName != ''">
+                and operate_user_name = #{operateUserName}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="operateUri != null and operateUri != ''">
+                and operate_uri = #{operateUri}
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                and operate_ip = #{operateIp}
+            </if>
+            <if test="operateTime != null">
+                and operate_time = #{operateTime}
+            </if>
+            <if test="operateVer != null and operateVer != ''">
+                and operate_ver = #{operateVer}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_operate_daily
+        <where>
+            <if test="operateId != null and operateId != ''">
+                and operate_id = #{operateId}
+            </if>
+            <if test="operateModul != null and operateModul != ''">
+                and operate_modul = #{operateModul}
+            </if>
+            <if test="operateType != null and operateType != ''">
+                and operate_type = #{operateType}
+            </if>
+            <if test="operateDesc != null and operateDesc != ''">
+                and operate_desc = #{operateDesc}
+            </if>
+            <if test="operateReqParam != null and operateReqParam != ''">
+                and operate_req_param = #{operateReqParam}
+            </if>
+            <if test="operateResParam != null and operateResParam != ''">
+                and operate_res_param = #{operateResParam}
+            </if>
+            <if test="operateUserId != null and operateUserId != ''">
+                and operate_user_id = #{operateUserId}
+            </if>
+            <if test="operateUserName != null and operateUserName != ''">
+                and operate_user_name = #{operateUserName}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="operateUri != null and operateUri != ''">
+                and operate_uri = #{operateUri}
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                and operate_ip = #{operateIp}
+            </if>
+            <if test="operateTime != null">
+                and operate_time = #{operateTime}
+            </if>
+            <if test="operateVer != null and operateVer != ''">
+                and operate_ver = #{operateVer}
+            </if>
+        </where>
+    </select>
+    <select id="queryAll" resultType="com.example.barter_log.domain.entity.BarterOperateDaily">
+        select
+            operate_id, operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_operate_daily
+    </select>
+    <select id="queryByCondition" resultType="com.example.barter_log.domain.entity.BarterOperateDaily">
+        select
+            operate_id, operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver
+        from barter_operate_daily where operate_type = #{type}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="operateId" useGeneratedKeys="true">
+        insert into barter_operate_daily(operate_id,operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver)
+        values (#{operateId}, #{operateModul}, #{operateType}, #{operateDesc}, #{operateReqParam}, #{operateResParam}, #{operateUserId}, #{operateUserName}, #{operateMethod}, #{operateUri}, #{operateIp}, #{operateTime}, #{operateVer})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="operateId" useGeneratedKeys="true">
+        insert into barter_operate_daily(operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.operateModul}, #{entity.operateType}, #{entity.operateDesc}, #{entity.operateReqParam}, #{entity.operateResParam}, #{entity.operateUserId}, #{entity.operateUserName}, #{entity.operateMethod}, #{entity.operateUri}, #{entity.operateIp}, #{entity.operateTime}, #{entity.operateVer})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="operateId" useGeneratedKeys="true">
+        insert into barter_operate_daily(operate_modul, operate_type, operate_desc, operate_req_param, operate_res_param, operate_user_id, operate_user_name, operate_method, operate_uri, operate_ip, operate_time, operate_ver)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.operateModul}, #{entity.operateType}, #{entity.operateDesc}, #{entity.operateReqParam}, #{entity.operateResParam}, #{entity.operateUserId}, #{entity.operateUserName}, #{entity.operateMethod}, #{entity.operateUri}, #{entity.operateIp}, #{entity.operateTime}, #{entity.operateVer})
+        </foreach>
+        on duplicate key update
+        operate_modul = values(operate_modul),
+        operate_type = values(operate_type),
+        operate_desc = values(operate_desc),
+        operate_req_param = values(operate_req_param),
+        operate_res_param = values(operate_res_param),
+        operate_user_id = values(operate_user_id),
+        operate_user_name = values(operate_user_name),
+        operate_method = values(operate_method),
+        operate_uri = values(operate_uri),
+        operate_ip = values(operate_ip),
+        operate_time = values(operate_time),
+        operate_ver = values(operate_ver)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_operate_daily
+        <set>
+            <if test="operateModul != null and operateModul != ''">
+                operate_modul = #{operateModul},
+            </if>
+            <if test="operateType != null and operateType != ''">
+                operate_type = #{operateType},
+            </if>
+            <if test="operateDesc != null and operateDesc != ''">
+                operate_desc = #{operateDesc},
+            </if>
+            <if test="operateReqParam != null and operateReqParam != ''">
+                operate_req_param = #{operateReqParam},
+            </if>
+            <if test="operateResParam != null and operateResParam != ''">
+                operate_res_param = #{operateResParam},
+            </if>
+            <if test="operateUserId != null and operateUserId != ''">
+                operate_user_id = #{operateUserId},
+            </if>
+            <if test="operateUserName != null and operateUserName != ''">
+                operate_user_name = #{operateUserName},
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                operate_method = #{operateMethod},
+            </if>
+            <if test="operateUri != null and operateUri != ''">
+                operate_uri = #{operateUri},
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                operate_ip = #{operateIp},
+            </if>
+            <if test="operateTime != null">
+                operate_time = #{operateTime},
+            </if>
+            <if test="operateVer != null and operateVer != ''">
+                operate_ver = #{operateVer},
+            </if>
+        </set>
+        where operate_id = #{operateId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_operate_daily where operate_id = #{operateId}
+    </delete>
+    <delete id="deleteAllOperate">
+        delete from barter_operate_daily
+    </delete>
+    <delete id="deleteAllException">
+        delete from barter_exc_daily
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.barter.orderservice.mapper.BarterShoppingCartInfoMapper">
+
+    <resultMap type="com.barter.orderservice.domain.entity.BarterShoppingCartInfo" id="BarterShoppingcartInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="goodId" column="good_id" jdbcType="INTEGER"/>
+        <result property="goodNum" column="good_num" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastEditTime" column="last_edit_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="ShoppingCartVoMap" type="com.barter.orderservice.domain.vo.ShoppingCartVo">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="goodId" column="good_id" jdbcType="INTEGER"/>
+        <result property="goodName" column="good_name" jdbcType="VARCHAR"/>
+        <result property="goodOwnerId" column="owner_id" jdbcType="INTEGER"/>
+        <result property="goodOwnerName" column="username" jdbcType="VARCHAR"/>
+        <result property="goodPrice" column="good_price" jdbcType="NUMERIC"/>
+        <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
+        <result property="goodNum" column="good_num" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastEditTime" column="last_edit_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterShoppingcartInfoMap">
+        select
+          id, user_id, good_id, good_num, create_time, last_edit_time
+        from barter_shoppingcart_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterShoppingcartInfoMap">
+        select
+          id, user_id, good_id, good_num, create_time, last_edit_time
+        from barter_shoppingcart_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="goodNum != null">
+                and good_num = #{goodNum}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_shoppingcart_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="goodId != null">
+                and good_id = #{goodId}
+            </if>
+            <if test="goodNum != null">
+                and good_num = #{goodNum}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lastEditTime != null">
+                and last_edit_time = #{lastEditTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryByUserIdGoodId" resultMap="BarterShoppingcartInfoMap" resultType="com.barter.orderservice.domain.entity.BarterShoppingCartInfo">
+        select *
+        from barter_shoppingcart_info
+        where user_id=#{userId} and good_id=#{goodId}
+    </select>
+
+<!--    通过用户id查询购物车信息-->
+    <select id="queryByUserId" resultMap="ShoppingCartVoMap" resultType="com.barter.orderservice.domain.vo.ShoppingCartVo">
+        select
+               id,
+               barter_shoppingcart_info.user_id,
+               barter_shoppingcart_info.good_id,
+               good_name,
+               owner_id,
+               username,
+               good_price,
+               img_url,
+               barter_shoppingcart_info.good_num,
+               barter_shoppingcart_info.create_time,
+               barter_shoppingcart_info.last_edit_time
+        from barter_shoppingcart_info,barter_goods_info,barter_user_info
+        where barter_shoppingcart_info.good_id = barter_goods_info.good_id
+            and barter_shoppingcart_info.user_id = barter_user_info.user_id
+            and barter_shoppingcart_info.user_id = #{userId}
+    </select>
+
+    <select id="countByGoodId" resultType="java.lang.Long">
+        select count(1)
+        from barter_shoppingcart_info
+        where user_id = #{userId} and good_id = #{goodId}
+    </select>
+
+    <select id="queryIdByUserIdGoodId" resultType="java.lang.Long">
+        select id from barter_shoppingcart_info where user_id = #{userId} and good_id = #{goodId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_shoppingcart_info(user_id, good_id, good_num, create_time, last_edit_time)
+        values (#{userId}, #{goodId}, #{goodNum}, #{createTime}, #{lastEditTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_shoppingcart_info(user_id, good_id, good_num, create_time, last_edit_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.userId}, #{entity.goodId}, #{entity.goodNum}, #{entity.createTime}, #{entity.lastEditTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into barter_shoppingcart_info(user_id, good_id, good_num, create_time, last_edit_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userId}, #{entity.goodId}, #{entity.goodNum}, #{entity.createTime}, #{entity.lastEditTime})
+        </foreach>
+        on duplicate key update
+        user_id = values(user_id),
+        good_id = values(good_id),
+        good_num = values(good_num),
+        create_time = values(create_time),
+        last_edit_time = values(last_edit_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_shoppingcart_info
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="goodId != null">
+                good_id = #{goodId},
+            </if>
+            <if test="goodNum != null">
+                good_num = #{goodNum},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateGoodNumI">
+        update barter_shoppingcart_info
+        set good_num = good_num+1
+        where user_id = #{userId} and good_id = #{goodId}
+    </update>
+
+    <update id="updateGoodNumD">
+        update barter_shoppingcart_info
+        set good_num = good_num-1
+        where user_id = #{userId} and good_id = #{goodId}
+    </update>
+
+<!--    更新商品购买数量-->
+    <update id="updateGoodNumById">
+        update barter_shoppingcart_info
+        set good_num = #{goodNum}
+        where user_id = #{userId} and good_id = #{goodId}
+    </update>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_shoppingcart_info where id = #{id}
+    </delete>
+
+<!--    通过用户id商品id删除商品-->
+    <delete id="deleteByUserIdGoodId">
+        delete from barter_shoppingcart_info where user_id = #{userId} and good_id = #{goodId}
+    </delete>
+
+</mapper>
+

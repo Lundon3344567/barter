@@ -1,0 +1,22 @@
+{
+  "email": {
+    "testRule": "/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.[a-zA-Z0-9_-])+/",
+    "messageError": "请输入正确的邮箱",
+    "messageEmpty": "请输入邮箱"
+  },
+  "password": {
+    "testRule": "/(?=.*[a-z_])(?=.*\\d)(?=.*[^a-z0-9_])[\\S]{8,20}/",
+    "messageError": "必须包含字母、数字、特殊字符，长度8-20",
+    "messageEmpty": "请输入密码"
+  },
+  "phone": {
+    "testRule": "/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\\d{8}$/",
+    "messageError": "请输入正确的手机号码",
+    "messageEmpty": "请输入手机号码"
+  },
+  "userName": {
+    "testRule": "/^[\\w\\u4E00-\\u9FA5]{3,15}$/",
+    "messageError": "只能包含汉字/数字/字母和下划线，长度3-15",
+    "messageEmpty": "请输入用户名"
+  }
+}

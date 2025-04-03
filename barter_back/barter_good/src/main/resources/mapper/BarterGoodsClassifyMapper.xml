@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.barter_good.mapper.BarterGoodsClassifyMapper">
+
+    <resultMap type="com.example.barter_good.domain.entity.BarterGoodsClassify" id="BarterGoodsClassifyMap">
+        <result property="classifyId" column="classify_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="sonId" column="son_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BarterGoodsClassifyMap">
+        select
+          classify_id, name, parent_id, son_id
+        from barter_goods_classify
+        where classify_id = #{classifyId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BarterGoodsClassifyMap">
+        select
+          classify_id, name, parent_id, son_id
+        from barter_goods_classify
+        <where>
+            <if test="classifyId != null">
+                and classify_id = #{classifyId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="sonId != null">
+                and son_id = #{sonId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from barter_goods_classify
+        <where>
+            <if test="classifyId != null">
+                and classify_id = #{classifyId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="sonId != null">
+                and son_id = #{sonId}
+            </if>
+        </where>
+    </select>
+    <select id="selectByParentId" resultMap="BarterGoodsClassifyMap" resultType="com.example.barter_good.domain.entity.BarterGoodsClassify">
+        select
+          classify_id, name, parent_id, son_id
+        from barter_goods_classify
+        where parent_id = #{parentId}
+    </select>
+    <select id="selectTree" resultMap="BarterGoodsClassifyMap" resultType="com.example.barter_good.domain.entity.BarterGoodsClassify">
+        select
+            classify_id,name,parent_id
+        from barter_goods_classify
+    </select>
+    <select id="selectparent" resultType="java.lang.Long">
+        select
+            parent_id
+        from barter_goods_classify
+        where classify_id = #{classifyId}
+    </select>
+
+    <select id="queryThirdLevelId" resultType="java.lang.Long">
+        select
+            classify_id
+        from barter_goods_classify
+        where parent_id = #{id}
+    </select>
+    <select id="countParent" resultType="java.lang.Integer">
+        select count(*) from barter_goods_classify where parent_id = 0
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="classifyId" useGeneratedKeys="true">
+        insert into barter_goods_classify(name, parent_id, son_id)
+        values (#{name}, #{parentId}, #{sonId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="classifyId" useGeneratedKeys="true">
+        insert into barter_goods_classify(name, parent_id, son_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.name}, #{entity.parentId}, #{entity.sonId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="classifyId" useGeneratedKeys="true">
+        insert into barter_goods_classify(name, parent_id, son_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.parentId}, #{entity.sonId})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        parent_id = values(parent_id),
+        son_id = values(son_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update barter_goods_classify
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="sonId != null">
+                son_id = #{sonId},
+            </if>
+        </set>
+        where classify_id = #{classifyId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from barter_goods_classify where classify_id = #{classifyId}
+    </delete>
+
+</mapper>
+

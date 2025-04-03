@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: utf-8
+spring:
+  datasource:
+    url: jdbc:mysql://123.60.48.119:3306/barterdev
+    username: barterdev
+    password: barterdevABC123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      timeout: 5000
+  application:
+    name: barter-good-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10114/eureka
+  instance:
+    prefer-ip-address: true #当调用getHostname获取实例的hostname时，返回IP而不是host名称
+    ip-address: localhost
+mybatis:
+  mapper-locations: classpath*:mapper/**Mapper.xml
+#布隆过滤器参数配置
+bloom:
+  filter:
+    expectedInsertions: 10000
+    fpp: 0.01F
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

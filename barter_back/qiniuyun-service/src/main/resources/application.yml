@@ -1,0 +1,71 @@
+spring:
+  datasource:
+    url: jdbc:mysql://123.60.48.119:3306/barterdev?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: barterdev
+    password: barterdevABC123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    minEvictableIdleTimeMillis: 300000
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    validationQuery: SELECT 1 FROM DUAL
+    connectionProperties:
+      druid:
+        stat:
+          mergeSql: true
+          slowSqlMillis: 5000
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+  profiles:
+    active: dev
+
+  application:
+    name: qiniuyunservice
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10114/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: localhost
+
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.barter.qiniuyun-service.domain
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 10002
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: utf-8
+  private:
+    key: ODFipEJFe4Pdp4mq
+
+
+oss:
+  qiniu:
+    url: r3zsoex7z.hn-bkt.clouddn.com
+    accessKey: Uu-heSHe_OQzXkOa2GPURD4LN_MOy12DJr3kXT1v
+    secretKey: yD-vwtiGV9SZ0aF94J3B8prq5EPNcuDmxNWAlWp6
+    bucketName: bartercloud1
+
+jasypt:
+  encryptor:
+    password: 0aF94J3B8pfd3DgQzXkOa2GPURD
+
+aes:
+  private:
+    key: ODFipEJFe4Pdp4mq
+
+client:
+  public:
+    key: ODFipEJFe4Pdp4mq

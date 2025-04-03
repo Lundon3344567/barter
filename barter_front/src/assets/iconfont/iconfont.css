@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2940317 */
+  src: url('iconfont.woff2?t=1639986438665') format('woff2'),
+       url('iconfont.woff?t=1639986438665') format('woff'),
+       url('iconfont.ttf?t=1639986438665') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.barter-shanchu:before {
+  content: "\e8b6";
+}
+
+.barter-yidu:before {
+  content: "\e71c";
+}
+
+.barter-weidu:before {
+  content: "\e6ce";
+}
+
+.barter-yidu1:before {
+  content: "\e6cf";
+}
+
+.barter-shouye:before {
+  content: "\e626";
+}
+
+.barter-gouwuchekong:before {
+  content: "\e601";
+}
+
+.barter-gouwucheman1:before {
+  content: "\e603";
+}
+
+.barter-gerenzhongxin:before {
+  content: "\e70b";
+}
+
+.barter-zhanghaoxinxi:before {
+  content: "\e98f";
+}
+
+.barter-xiaoxitongzhi:before {
+  content: "\ec35";
+}
+
+.barter-zhanghao-anquan:before {
+  content: "\e67c";
+}
+
+.barter-shoucang:before {
+  content: "\e8b9";
+}
+
+.barter-shoucang1:before {
+  content: "\e8c6";
+}
+
+.barter-kanguo:before {
+  content: "\e65e";
+}
+
+.barter-gaozhiliang_tongyong:before {
+  content: "\e69a";
+}
+
+.barter-gaozhiliang:before {
+  content: "\e64c";
+}
+
+.barter-guanwangtubiao-08:before {
+  content: "\e602";
+}
+
